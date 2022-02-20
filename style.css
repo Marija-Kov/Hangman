@@ -1,1 +1,9 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+span {
+  display: inline-block;
+  font-size: 20px;
+  margin: 2px;
+  height: 25px;
+  width: 25px;
+  border-bottom: solid 3px salmon;
+}
+/*# sourceMappingURL=style.css.map */
