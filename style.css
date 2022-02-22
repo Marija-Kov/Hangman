@@ -1,4 +1,5 @@
-span {
+span,
+button.key {
   display: inline-block;
   font-size: 20px;
   margin: 2px;
@@ -7,12 +8,12 @@ span {
   border-bottom: solid 3px salmon;
 }
 
-span.key {
+button.key {
   border: none;
   background: salmon;
 }
 
-span.tried {
+button.tried {
   color: #ada9a9;
   border: none;
 }

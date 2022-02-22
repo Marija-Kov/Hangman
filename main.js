@@ -1,4 +1,4 @@
-
+let miss = 0;
 
 let animals = fetch ('animals.json')
               .then(response => response.json())
@@ -32,27 +32,37 @@ function empties(chars) {
 
 function setKeys(keys) {
     for (let i = 0; i < keys.length; i++){
-    let key = document.createElement('span');
+    let key = document.createElement('button');
     key.classList.add('key');
     key.innerHTML = keys[i];
     document.body.appendChild(key);
     key.addEventListener('click', () => {
-        let miss = 0;
         key.setAttribute('class', 'tried');
-        let guess = document.querySelectorAll('span');
-        guess.forEach(g => { 
-          if (g.classList == `${keys[i]}` || g.classList == `${keys[i].toUpperCase()}`){
-              key.innerHTML != g.classList ? g.innerHTML = keys[i].toUpperCase() : g.innerHTML = keys[i];
-              console.log(g.innerHTML + '--CORRECT')
-            } else if (g.classList == key.innerHTML ){ // needs another condition to isolate the case for incorrect!
-                console.log(g.innerHTML + '--incorrect')
-            }
-                       
-          
-           
-    })
+        key.setAttribute('disabled', 'true');
+        let guess = document.querySelectorAll(`.${keys[i]} , .${keys[i].toUpperCase()}`); //makes sure uppercase letter class is included
+         if ( guess.length === 0 ) { 
+             miss++; 
+             miss === 7 ? console.log (`you lost !`) : console.log (`${miss} missed !`)
+        } else if ( guess.length != 0 ) {
+            guess.forEach(g => {
+                g.classList.contains(`${keys[i].toUpperCase()}`) ? 
+                g.innerHTML = keys[i].toUpperCase() : g.innerHTML = keys[i]  //makes sure first letter is displayed in uppercase
+                
+            })
+
+         }                       
     
     })
     
     }
 }
+/*
+let guess = document.querySelectorAll('.XX');
+guess.forEach(g => { 
+  if (g.classList.contains(`${keys[i]}`) || g.classList.contains(`${keys[i].toUpperCase()}`)){ //makes sure uppercase letter class is included
+      g.classList.contains(key.innerHTML) ? g.innerHTML = keys[i] : g.innerHTML = keys[i].toUpperCase(); //makes sure first letter is displayed in uppercase
+      console.log(g.innerHTML + '--CORRECT')
+    } else if (!g.classList.contains(`${keys[i]}`) && !g.classList.contains(`${keys[i].toUpperCase()}`)) {// needs another condition to isolate the case for incorrect!
+      console.log(key.innerHTML + '--incorrect') // this should log only once
+        
+    } */
