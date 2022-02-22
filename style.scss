@@ -1,3 +1,19 @@
+#word {
+    display: flex;
+    justify-content: center;
+    max-width: fit-content;
+    background:#ada9a983;
+    margin: 20px;
+}
+
+#keys {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 58vw;
+    justify-content: center;
+    margin: 20px;
+}
+
 span,
 button.key {
     display: inline-block;

@@ -1,4 +1,6 @@
 let miss = 0;
+let got = 0;
+
 
 let animals = fetch ('animals.json')
               .then(response => response.json())
@@ -26,7 +28,7 @@ function empties(chars) {
         let field = document.createElement('span');
         field.classList.add(`${chars[i]}`);
         //field.innerHTML = chars[i];
-        document.body.appendChild(field);
+        document.querySelector('#word').appendChild(field);
     }
 }
 
@@ -35,34 +37,30 @@ function setKeys(keys) {
     let key = document.createElement('button');
     key.classList.add('key');
     key.innerHTML = keys[i];
-    document.body.appendChild(key);
+    document.querySelector('#keys').appendChild(key);
     key.addEventListener('click', () => {
         key.setAttribute('class', 'tried');
         key.setAttribute('disabled', 'true');
-        let guess = document.querySelectorAll(`.${keys[i]} , .${keys[i].toUpperCase()}`); //makes sure uppercase letter class is included
+        let guess = document.querySelectorAll(`.${keys[i]} , .${keys[i].toUpperCase()}`);
+        //makes sure uppercase letter class is included
          if ( guess.length === 0 ) { 
              miss++; 
              miss === 7 ? console.log (`you lost !`) : console.log (`${miss} missed !`)
         } else if ( guess.length != 0 ) {
             guess.forEach(g => {
                 g.classList.contains(`${keys[i].toUpperCase()}`) ? 
-                g.innerHTML = keys[i].toUpperCase() : g.innerHTML = keys[i]  //makes sure first letter is displayed in uppercase
+                g.innerHTML = keys[i].toUpperCase() : g.innerHTML = keys[i]; //makes sure first letter is displayed in uppercase
                 
             })
-
-         }                       
+            got += guess.length; console.log(`got ${got} !`) // divide guess.length by itself if multiple-letter guess is to be counted as 1 got
+            let word = document.querySelectorAll('span');
+            let str = '';
+            word.forEach( w => { str += w.innerHTML });
+            if (got === word.length) { console.log(`yes, you guessed it: ${str} !`)} 
+         }  
+                            
     
     })
     
     }
 }
-/*
-let guess = document.querySelectorAll('.XX');
-guess.forEach(g => { 
-  if (g.classList.contains(`${keys[i]}`) || g.classList.contains(`${keys[i].toUpperCase()}`)){ //makes sure uppercase letter class is included
-      g.classList.contains(key.innerHTML) ? g.innerHTML = keys[i] : g.innerHTML = keys[i].toUpperCase(); //makes sure first letter is displayed in uppercase
-      console.log(g.innerHTML + '--CORRECT')
-    } else if (!g.classList.contains(`${keys[i]}`) && !g.classList.contains(`${keys[i].toUpperCase()}`)) {// needs another condition to isolate the case for incorrect!
-      console.log(key.innerHTML + '--incorrect') // this should log only once
-        
-    } */
