@@ -36,22 +36,41 @@ function empties(chars) {
 }
 
 
+
 function setKeys(keys) {
+    document.body.addEventListener('keyup', anyKey)
+
+    function anyKey (ev) {
+       // let target = ev.currentTarget;
+       // let tag = target.tagName;
+        let char = ev.char || ev.charCode || ev.which;
+        let s = String.fromCharCode(char);
+       // console.log(char, tag); console.log(s); 
+        let khees = document.querySelectorAll('.key');
+        for (let i = 0; i < khees.length; i++){
+            if (khees[i].innerHTML === s || khees[i].innerHTML === s.toLowerCase()){
+                khees[i].click();
+            }
+        }  
+    }
+
     for (let i = 0; i < keys.length; i++){
-    let key = document.createElement('button');
-    key.classList.add('key');
-    key.innerHTML = keys[i];
-    document.querySelector('#keys').appendChild(key);
-    key.addEventListener('click', () => {
-        key.setAttribute('class', 'tried');
-        key.setAttribute('disabled', 'true');
+         let kiy = document.createElement('button');
+         kiy.classList.add('key');
+         kiy.innerHTML = keys[i];
+         document.querySelector('#keys').appendChild(kiy);
+         kiy.addEventListener('click', clicked);
+    
+    function clicked() {
+        kiy.setAttribute('class', 'tried');
+        kiy.setAttribute('disabled', 'true');
         let guess = document.querySelectorAll(`.${keys[i]} , .${keys[i].toUpperCase()}`);
         //   ^   makes sure uppercase letter class is included
          if ( guess.length === 0 ) { 
              miss++; 
              bodyParts[miss]();
-             miss === 7 ? console.log (`you lost !`) : console.log (`${miss} missed !`);
-             if (miss ===7) { setTimeout(() => { window.location.reload() }, 1000) }
+             miss === bodyParts.length - 1 ? console.log (`you lost !`) : console.log (`${miss} missed !`);
+             if (miss === bodyParts.length - 1) { setTimeout(() => { window.location.reload() }, 1000) }
         } else if ( guess.length != 0 ) {
             guess.forEach(g => {
                 g.classList.contains(`${keys[i].toUpperCase()}`) ? 
@@ -66,10 +85,11 @@ function setKeys(keys) {
                 console.log(`yes, you guessed it: ${str} !`)
                 setTimeout(() => { window.location.reload() }, 500);
             } 
-         }  
-                            
-    
-    })
-    
-    }
+         }   
+        
+                          
+        }
+      
+
+}
 }
