@@ -8,9 +8,20 @@
     <title>Hangman</title>
 </head>
 <body>
-    <canvas id = "canvas" height='300' ></canvas>
-<div id = "word"></div>
-<div id = "keys"></div>
-<script type = "module" src = "main.js"></script>
+<div class="container">
+ <div class="frame-canvas-container">
+  <div class="canvas-wrapper">
+    <canvas id = "canvas" height='300'></canvas>
+     <div id = "word"></div>
+      <div id = "keys"></div>
+  </div>
+  <img class="picture-frame" src="./assets/picture-frame.jpeg" alt="Kitschy art frame" />
+  </div>
+  <div class="guessed--reset">
+    <p class="words-guessed"></p>
+    <button class="reset">Reset</button>
+  </div>
+ </div>
+ <script type = "module" src = "main.js"></script>
 </body>
 </html>
