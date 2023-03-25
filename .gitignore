@@ -1,5 +1,5 @@
-# To untrack already commited files: git rm --cache <name or extension>
-# To untrack already commited folders: git rm -r --cache <folder>
+# To untrack already commited files: git rm --cached <name or extension>
+# To untrack already commited folders: git rm -r --cached <folder>
 
 .vscode/
 .gitattributes
